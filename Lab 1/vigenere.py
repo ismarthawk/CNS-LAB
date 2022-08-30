@@ -1,40 +1,32 @@
+class Vigenere : 
+    def encrypt(self, plain, key) : 
+        s = ''
+        while len(s) < len(plain) :
+            s += key 
+        res = ''
+        for ind, char in enumerate(plain) :
+            k = ord(s[ind]) - 97
+            num = ord(char) - 97
+            newNum = (num + k) % 26
+            res += chr(newNum + 97)
+        return res.upper()
+        
+        
+    def decrypt(self, cipher, key) : 
+        s = ''
+        cipher = cipher.lower()
+        while len(s) < len(cipher) : 
+            s += key
+        res = ''
+        for ind, char in enumerate(cipher) : 
+            k = ord(s[ind]) - 97
+            num = ord(char) - 97
+            newNum = (num - k + 26) % 26
+            res += chr(newNum + 97)
+        return res
 
-mat=[[j for j in range(26)] for i in range(26)]
-def encrypt(s,key):
-    cipher=""
-    s=s.lower()
-    key=key.lower()
-    newkey=changer(s,key)
-    for i in range(len(s)):
-        l=ord(s[i])-97
-        k=ord(newkey[i])-97
-        cipher+=chr((mat[l][k]+ord(s[i])-97)%26+97)
-    return cipher.upper()
 
 
-def changer(s,key):
-    k=len(s)/len(key)
-    while(k>1):
-        key+=key
-        k=len(s)/len(key)
-    while(len(key)!=len(s)):
-        key=key[:-1]
-    print(s)
-    print(key)
-    return key
-
-
-def decrypt(s,key):
-    plain=""
-    s=s.lower()
-    key.lower()
-    newkey=changer(s,key)
-    for i in range(len(s)):
-        c=(ord(s[i])-ord(newkey[i])+26)%26
-        plain+=chr(c+97)
-    return plain
-    
-    
-print(encrypt('damodar', 'esc'))
-print(decrypt('HSOSVCV', 'esc'))
-
+if __name__ == "__main__" : 
+    print(Vigenere().encrypt('damodar','estate'))
+    print(Vigenere().decrypt('HSFOWEV','estate'))
